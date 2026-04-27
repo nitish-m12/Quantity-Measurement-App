@@ -1,29 +1,31 @@
 /**
- * Enum representing different length units.
- * Each unit has a conversion factor relative to base unit (FEET).
+ * Enum representing supported length units.
+ * Each unit stores a conversion factor relative to base unit (FEET).
  */
 public enum LengthUnit {
 
     FEET(1.0),
-    INCHES(1.0 / 12.0),       // 1 inch = 1/12 feet
-    YARDS(3.0),               // 1 yard = 3 feet
-    CENTIMETERS(1.0 / 30.48); // 1 cm = 1/30.48 feet
+    INCHES(1.0 / 12.0),
+    YARDS(3.0),
+    CENTIMETERS(1.0 / 30.48);
 
-    private final double conversionFactor;
+    private final double toFeetFactor;
 
-    /**
-     * Constructor to assign conversion factor.
-     * @param conversionFactor factor relative to FEET
-     */
-    LengthUnit(double conversionFactor) {
-        this.conversionFactor = conversionFactor;
+    LengthUnit(double toFeetFactor) {
+        this.toFeetFactor = toFeetFactor;
     }
 
     /**
-     * Getter for conversion factor
-     * @return conversion factor
+     * Converts a value from this unit to feet (base unit)
      */
-    public double getConversionFactor() {
-        return conversionFactor;
+    public double toFeet(double value) {
+        return value * toFeetFactor;
+    }
+
+    /**
+     * Converts a value from feet (base unit) to this unit
+     */
+    public double fromFeet(double feetValue) {
+        return feetValue / toFeetFactor;
     }
 }
