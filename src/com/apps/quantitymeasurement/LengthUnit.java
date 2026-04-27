@@ -1,6 +1,7 @@
 /**
- * Enum representing supported length units.
- * Each unit stores a conversion factor relative to base unit (FEET).
+ * LengthUnit enum is now a standalone class.
+ * It is responsible ONLY for unit conversions.
+ * Base unit = FEET
  */
 public enum LengthUnit {
 
@@ -9,23 +10,34 @@ public enum LengthUnit {
     YARDS(3.0),
     CENTIMETERS(1.0 / 30.48);
 
-    private final double toFeetFactor;
+    private final double conversionFactor;
 
-    LengthUnit(double toFeetFactor) {
-        this.toFeetFactor = toFeetFactor;
+    /**
+     * Constructor to assign conversion factor
+     * @param conversionFactor factor relative to base unit (feet)
+     */
+    LengthUnit(double conversionFactor) {
+        this.conversionFactor = conversionFactor;
     }
 
     /**
-     * Converts a value from this unit to feet (base unit)
+     * Convert given value to base unit (feet)
      */
-    public double toFeet(double value) {
-        return value * toFeetFactor;
+    public double convertToBaseUnit(double value) {
+        return value * conversionFactor;
     }
 
     /**
-     * Converts a value from feet (base unit) to this unit
+     * Convert base unit (feet) to this unit
      */
-    public double fromFeet(double feetValue) {
-        return feetValue / toFeetFactor;
+    public double convertFromBaseUnit(double baseValue) {
+        return baseValue / conversionFactor;
+    }
+
+    /**
+     * Getter for testing purposes
+     */
+    public double getConversionFactor() {
+        return conversionFactor;
     }
 }
