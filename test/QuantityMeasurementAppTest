@@ -51,7 +51,7 @@ public class QuantityMeasurementAppTest {
 
         assertFalse(l1.equals(null));
     }
-
+// feature6
     @Test
     public void testSameReference() {
         Length l1 = new Length(1.0, Length.LengthUnit.FEET);
